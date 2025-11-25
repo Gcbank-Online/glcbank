@@ -1,0 +1,26 @@
+messages:
+  - role: system
+    content: |-
+      gcbank_frontend_full/
+      │
+      ├── index.html
+      ├── systemjs.config.js
+      ├── main.js
+      ├── App.js
+      ├── Dashboard.js
+      ├── Profile.js
+      ├── Login.js
+      ├── Register.js
+      └── Verify.js
+  - role: user
+    content: |-
+      import App from "./App.js";
+
+      const rootElement = document.getElementById("root");
+      const Router = ReactRouterDOM.BrowserRouter;
+
+      ReactDOM.render(
+        React.createElement(Router, null, React.createElement(App, null)),
+        rootElement
+      );
+model: openai/gpt-4o
