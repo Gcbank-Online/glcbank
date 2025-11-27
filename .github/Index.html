@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCBank Client</title>
+    <style>
+        body { font-family: sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        input { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; }
+        button { background-color: #4CAF50; color: white; padding: 12px 20px; border: none; cursor: pointer; width: 100%; }
+        #message { margin-top: 20px; padding: 10px; border-radius: 4px; }
+        .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+    </style>
+</head>
+<body>
+
+    <h1>GCBank Login</h1>
+    <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+
+        <button type="submit">Log In</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:3000'; // **NOTE: Update if your API is on a different port/host**
+
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = 'Logging in...';
+            messageDiv.className = '';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Successful login! Store the token and display account info.
+                    localStorage.setItem('gcbank_token', data.token);
+                    messageDiv.className = 'success';
+                    messageDiv.innerHTML = `
+                        Login Successful! Token stored.<br>
+                        Account: **${data.account.account_number}**<br>
+                        Balance: **$${data.account.balance}**
+                    `;
+                } else {
+                    // Login failed (e.g., Invalid credentials, 401)
+                    messageDiv.className = 'error';
+                    messageDiv.textContent = 'Login failed: ' + (data.error || 'Unknown error');
+                }
+            } catch (error) {
+                // Network or CORS error
+                messageDiv.className = 'error';
+                messageDiv.textContent = 'Network Error. Check if the GCBank API is running.';
+                console.error('Fetch error:', error);
+            }
+        });
+    </script>
+
+</body>
+</html>
