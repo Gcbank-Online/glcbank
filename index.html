@@ -3,85 +3,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GCBank - Home</title>
+    <title>GCBank - Secure Digital Banking</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Color variables for consistency */
+        .bg-primary-dark { background-color: #003366; }
+        .text-primary-dark { color: #003366; }
+        .bg-secondary-teal { background-color: #008080; }
+        .hover\:bg-secondary-teal-light:hover { background-color: #009999; }
+        .dropdown-menu {
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+        }
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        /* Mobile menu slide-down effect */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+            overflow: hidden;
+        }
+    </style>
 </head>
+<body>
 
-<body class="bg-gray-100">
+    <!-- FLOATING GET STARTED BUTTON -->
+    <a href="#accounts" class="fixed bottom-6 right-6 z-50 p-4 bg-teal-500 text-white font-bold rounded-full shadow-2xl hover:bg-teal-600 transition duration-300 transform hover:scale-105 animate-pulse">
+        Get Started
+    </a>
 
-<!-- HEADER -->
-<header class="bg-white shadow p-5 flex justify-between items-center">
-    <div class="flex items-center gap-2">
-        <img src="assets/logo.png" class="h-10" alt="logo">
-        <h1 class="text-2xl font-bold text-blue-700">GCBank</h1>
-    </div>
+    <!-- HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                
+                <!-- Logo/Brand -->
+                <a href="#hero" class="text-2xl font-extrabold text-primary-dark tracking-tight">GCBank</a>
+                
+                <!-- Desktop Navigation (Hidden on Mobile) -->
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#hero" class="text-gray-600 hover:text-primary-dark font-medium transition duration-150">Home</a>
+                    
+                    <!-- Dropdown Menu Container -->
+                    <div class="relative group">
+                        <button id="dropdown-toggle" class="flex items-center text-gray-600 hover:text-primary-dark font-medium transition duration-150 p-2 rounded-lg focus:outline-none">
+                            All Pages & Services
+                            <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
 
-    <nav class="hidden md:flex gap-8">
-        <a href="index.html" class="text-gray-700">Home</a>
-        <a href="#services" class="text-gray-700">Services</a>
-        <a href="#about" class="text-gray-700">About</a>
-        <a href="#contact" class="text-gray-700">Contact</a>
-    </nav>
+                        <!-- Dropdown Menu Content -->
+                        <div id="dropdown-content" class="dropdown-menu absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-2xl overflow-hidden ring-1 ring-black ring-opacity-5">
+                            <div class="py-2 text-sm text-gray-700">
+                                <span class="px-4 py-2 block font-bold text-primary-dark border-b">Accounts</span>
+                                <a href="#savings" class="block px-4 py-2 hover:bg-gray-100">Savings Account</a>
+                                <a href="#checking" class="block px-4 py-2 hover:bg-gray-100">Checking Account</a>
+                                <a href="#current" class="block px-4 py-2 hover:bg-gray-100">Current Account</a>
+                                <a href="#business" class="block px-4 py-2 hover:bg-gray-100">Business Account</a>
+                                
+                                <span class="px-4 py-2 block font-bold text-primary-dark border-b mt-2">Services & Goals</span>
+                                <a href="#investments" class="block px-4 py-2 hover:bg-gray-100">Investments & Shares</a>
+                                <a href="#loans" class="block px-4 py-2 hover:bg-gray-100">Loans & Credit</a>
+                                <a href="#insurance" class="block px-4 py-2 hover:bg-gray-100">Insurance & Protection</a>
+                                <a href="#retirement" class="block px-4 py-2 hover:bg-gray-100">Retirement Planning</a>
+                                <a href="#crypto" class="block px-4 py-2 hover:bg-gray-100">Crypto Investments</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#footer" class="text-gray-600 hover:text-primary-dark font-medium transition duration-150">Contact</a>
+                </nav>
 
-    <!-- Mobile Menu Icon -->
-    <button id="menuBtn" class="md:hidden text-3xl">☰</button>
-</header>
-
-<!-- Mobile Menu -->
-<div id="mobileMenu" class="hidden flex-col bg-white p-5 shadow md:hidden">
-    <a href="index.html" class="py-2">Home</a>
-    <a href="#services" class="py-2">Services</a>
-    <a href="#about" class="py-2">About</a>
-    <a href="#contact" class="py-2">Contact</a>
-    <a href="login.html" class="py-2">Login</a>
-</div>
-
-<!-- HERO SECTION -->
-<section
-    class="h-[60vh] bg-cover bg-center flex items-center text-white p-10"
-    style="background-image: url('assets/hero.jpg');">
-    
-    <div>
-        <h2 class="text-4xl font-bold mb-4">Smart Banking for a Smarter Life</h2>
-        <p class="mb-6 max-w-md">
-            Manage your money, apply for loans, invest, and more with GCBank.
-        </p>
-
-        <div class="flex gap-4">
-            <a href="register.html" class="bg-white text-blue-700 px-6 py-3 rounded">Get Started</a>
-            <a href="login.html" class="bg-blue-700 px-6 py-3 rounded">Login</a>
-        </div>
-    </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="p-10">
-    <h3 class="text-3xl font-bold text-center mb-8">Our Services</h3>
-
-    <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white p-5 shadow rounded">
-            <h4 class="font-semibold mb-2">Loans</h4>
-            <p>Instant loans with flexible repayment options.</p>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100 focus:outline-none transition duration-150">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
         </div>
 
-        <div class="bg-white p-5 shadow rounded">
-            <h4 class="font-semibold mb-2">Credit Cards</h4>
-            <p>Spend smarter with low-interest credit cards.</p>
+        <!-- Mobile Dropdown Menu (Initially Hidden) -->
+        <div id="mobile-menu" class="md:hidden max-h-0">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-sm bg-gray-50 border-t">
+                <a href="#hero" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200" onclick="closeMobileMenu()">Home</a>
+                <a href="#accounts" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200" onclick="closeMobileMenu()">All Accounts</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200" onclick="closeMobileMenu()">All Services</a>
+                <a href="#footer" class="block px-3 py-2 rounded-md text-gray-700 hover:bg-gray-200" onclick="closeMobileMenu()">Contact</a>
+                <a href="#accounts" class="block w-full text-center py-2 bg-teal-500 text-white rounded-md font-semibold mt-2" onclick="closeMobileMenu()">Get Started Today</a>
+            </div>
         </div>
+    </header>
 
-        <div class="bg-white p-5 shadow rounded">
-            <h4 class="font-semibold mb-2">Investments</h4>
-            <p>Grow your money with our trusted investment plans.</p>
+    <main>
+        
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="bg-primary-dark text-white pt-20 pb-16 md:pt-32 md:pb-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+                    Secure Your Tomorrow, <span class="text-teal-400">Today.</span>
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    GCBank is your trusted digital platform for seamless banking, smart investments, and comprehensive financial security.
+                </p>
+                <div class="space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#accounts" class="inline-block py-3 px-8 bg-teal-500 hover:bg-teal-600 text-white text-lg font-semibold rounded-full shadow-lg transition duration-300 transform hover:-translate-y-0.5">
+                        Open an Account
+                    </a>
+                    <a href="#services" class="inline-block py-3 px-8 bg-white hover:bg-gray-100 text-primary-dark text-lg font-semibold rounded-full shadow-lg transition duration-300 transform hover:-translate-y-0.5">
+                        Explore Services
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ACCOUNTS SECTION - Detail Descriptions -->
+        <section id="accounts" class="py-16 md:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-center text-primary-dark mb-4">Banking Solutions Built For You</h2>
+                <p class="text-xl text-center text-gray-600 max-w-4xl mx-auto mb-12">
+                    Whether you're saving for the future or managing daily cash flow, we have the perfect account to fit your life.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Account Card: Savings -->
+                    <div id="savings" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-teal-500">
+                        <h3 class="text-2xl font-semibold text-primary-dark mb-2">Savings Accounts</h3>
+                        <p class="text-teal-600 font-medium mb-4">High-Interest & Flexible</p>
+                        <p class="text-gray-700">Designed for future goals. Earn competitive interest rates, no monthly fees, and automated savings plans to help you reach milestones faster, from education to travel.</p>
+                    </div>
+
+                    <!-- Account Card: Checking -->
+                    <div id="checking" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-teal-500">
+                        <h3 class="text-2xl font-semibold text-primary-dark mb-2">Checking Accounts</h3>
+                        <p class="text-teal-600 font-medium mb-4">Daily Ease & Zero Hassle</p>
+                        <p class="text-gray-700">Perfect for everyday transactions. Includes a modern debit card, unlimited fee-free transactions, and mobile check deposits for maximum convenience.</p>
+                    </div>
+
+                    <!-- Account Card: Current -->
+                    <div id="current" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-teal-500">
+                        <h3 class="text-2xl font-semibold text-primary-dark mb-2">Current Accounts</h3>
+                        <p class="text-teal-600 font-medium mb-4">Overdraft & Priority</p>
+                        <p class="text-gray-700">A premium account for high-value clients. Features include a dedicated relationship manager, enhanced overdraft facilities, and priority service channels.</p>
+                    </div>
+
+                    <!-- Account Card: Credit Card -->
+                    <div id="credit" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-teal-500">
+                        <h3 class="text-2xl font-semibold text-primary-dark mb-2">Credit Card Accounts</h3>
+                        <p class="text-teal-600 font-medium mb-4">Rewards & Security</p>
+                        <p class="text-gray-700">Choose from a range of cards with global acceptance, robust fraud protection, and flexible rewards programs tailored to your spending habits.</p>
+                    </div>
+
+                    <!-- Account Card: Business -->
+                    <div id="business" class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-teal-500">
+                        <h3 class="text-2xl font-semibold text-primary-dark mb-2">Business Accounts</h3>
+                        <p class="text-teal-600 font-medium mb-4">Growth Focused & Scalable</p>
+                        <p class="text-gray-700">Solutions for entrepreneurs and enterprises. Includes bulk payment processing, payroll services, and dedicated business support resources.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SERVICES SECTION - Detail Descriptions -->
+        <section id="services" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-bold text-center text-primary-dark mb-4">Expand Your Wealth Potential</h2>
+                <p class="text-xl text-center text-gray-600 max-w-4xl mx-auto mb-12">
+                    Beyond accounts, GCBank offers a full suite of services to grow, protect, and manage your financial life.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Service Card: Investments & Shares -->
+                    <div id="investments" class="p-6 rounded-xl bg-primary-dark text-white shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-teal-300">Investments & Shares</h3>
+                        <p class="text-gray-300">Access global markets with our intuitive trading platform. Invest in shares, bonds, and mutual funds with expert guidance and low commission fees.</p>
+                    </div>
+
+                    <!-- Service Card: Loans & Credit -->
+                    <div id="loans" class="p-6 rounded-xl bg-primary-dark text-white shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-teal-300">Loans & Credit</h3>
+                        <p class="text-gray-300">Flexible financing for life's biggest purchases—home mortgages, auto loans, and personal credit lines with fast approval and competitive rates.</p>
+                    </div>
+
+                    <!-- Service Card: Insurance -->
+                    <div id="insurance" class="p-6 rounded-xl bg-primary-dark text-white shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-teal-300">Home & Life Insurance</h3>
+                        <p class="text-gray-300">Protect what matters most. Comprehensive policies for your property and family, ensuring financial stability through life's unexpected events.</p>
+                    </div>
+
+                    <!-- Service Card: Retirement -->
+                    <div id="retirement" class="p-6 rounded-xl bg-primary-dark text-white shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-teal-300">Retirement Goals & Plans</h3>
+                        <p class="text-gray-300">Plan for a secure retirement with personalized savings strategies, expert portfolio management, and tax-advantaged accounts.</p>
+                    </div>
+                    
+                    <!-- Service Card: Crypto -->
+                    <div id="crypto" class="p-6 rounded-xl bg-primary-dark text-white shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-teal-300">Cryptocurrency Investments</h3>
+                        <p class="text-gray-300">Securely buy, sell, and hold major cryptocurrencies directly within your banking app, integrating digital assets with traditional finance.</p>
+                    </div>
+
+                    <!-- Service Card: Credit Cards -->
+                    <div class="p-6 rounded-xl bg-primary-dark text-white shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-teal-300">Premium Credit Cards</h3>
+                        <p class="text-gray-300">Exclusive credit card offerings with high limits, premium travel benefits, and tailored cash-back categories for sophisticated spending.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. CTA FOOTER BANNER -->
+        <section class="bg-secondary-teal py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Your Financial Journey?</h2>
+                <p class="text-xl text-teal-100 mb-8">Join thousands of satisfied clients today and experience banking the modern way.</p>
+                <a href="#accounts" class="inline-block py-3 px-10 bg-white hover:bg-gray-200 text-secondary-teal text-lg font-semibold rounded-full shadow-xl transition duration-300">
+                    Apply Now
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="bg-primary-dark text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="text-lg font-bold text-teal-400 mb-4">GCBank</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="#" class="hover:text-teal-400">About Us</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Careers</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Media</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Security</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold text-teal-400 mb-4">Account Help</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="#savings" class="hover:text-teal-400">Account Types</a></li>
+                    <li><a href="#loans" class="hover:text-teal-400">Mortgage Rates</a></li>
+                    <li><a href="#" class="hover:text-teal-400">FAQs</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Report Fraud</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold text-teal-400 mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="#" class="hover:text-teal-400">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-teal-400">Accessibility</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold text-teal-400 mb-4">Contact</h4>
+                <p class="text-sm text-gray-300">1-800-GCB-BANK</p>
+                <p class="text-sm text-gray-300 mt-1">support@gcbank.com</p>
+                <p class="text-xs text-gray-500 mt-4">GCBank Plc &copy; 2025</p>
+            </div>
         </div>
-    </div>
-</section>
+    </footer>
 
-<!-- FOOTER -->
-<footer class="bg-gray-900 text-white text-center p-4 mt-8">
-    © 2025 GCBank. All rights reserved.
-</footer>
 
-<script src="js/main.js"></script>
+    <script>
+        // --- DESKTOP DROPDOWN LOGIC ---
+        const dropdownToggle = document.getElementById('dropdown-toggle');
+        const dropdownContent = document.getElementById('dropdown-content');
 
+        // Toggle dropdown on click
+        dropdownToggle.addEventListener('click', () => {
+            dropdownContent.classList.toggle('open');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!dropdownToggle.contains(event.target) && !dropdownContent.contains(event.target)) {
+                dropdownContent.classList.remove('open');
+            }
+        });
+
+        // Close dropdown when a link inside it is clicked (for smooth scroll)
+        dropdownContent.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                dropdownContent.classList.remove('open');
+            });
+        });
+
+
+        // --- MOBILE MENU LOGIC ---
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        function toggleMobileMenu() {
+            const isMenuOpen = mobileMenu.classList.toggle('is-open');
+
+            if (isMenuOpen) {
+                // Open menu
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                // Close menu
+                mobileMenu.style.maxHeight = "0";
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+        
+        window.closeMobileMenu = function() {
+            // Wait for smooth scroll to finish, then close menu
+            setTimeout(() => {
+                mobileMenu.style.maxHeight = "0";
+                mobileMenu.classList.remove('is-open');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }, 300); // 300ms delay to match transition speed
+        }
+
+        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+        // Set initial max-height property on load for smooth transition
+        window.addEventListener('load', () => {
+             mobileMenu.style.maxHeight = "0";
+        });
+    </script>
 </body>
 </html>
+
