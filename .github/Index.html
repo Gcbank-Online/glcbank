@@ -2,75 +2,232 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GCBank Client</title>
-    <style>
-        body { font-family: sans-serif; max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
-        input { width: 100%; padding: 10px; margin: 8px 0; box-sizing: border-box; }
-        button { background-color: #4CAF50; color: white; padding: 12px 20px; border: none; cursor: pointer; width: 100%; }
-        #message { margin-top: 20px; padding: 10px; border-radius: 4px; }
-        .success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
-        .error { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
-    </style>
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCBank - Secure Digital Banking</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-    <h1>GCBank Login</h1>
-    <form id="loginForm">
-        <label for="email">Email:</label>
-        <input type="email" id="email" required>
+    <!-- FLOATING GET STARTED BUTTON -->
+    <a href="#accounts" class="fixed bottom-6 right-6 z-50 p-4 bg-teal-500 text-white font-bold rounded-full shadow-2xl hover:bg-teal-600 transition transform hover:scale-105 animate-pulse">
+        Get Started
+    </a>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" required>
+    <!-- HEADER -->
+    <header class="sticky top-0 bg-white shadow-lg z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
 
-        <button type="submit">Log In</button>
-    </form>
+            <a href="#hero" class="text-2xl font-extrabold text-primary-dark">GCBank</a>
 
-    <div id="message"></div>
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#hero" class="text-gray-600 hover:text-primary-dark">Home</a>
 
-    <script>
-        const API_BASE_URL = 'http://localhost:3000'; // **NOTE: Update if your API is on a different port/host**
+                <div class="relative">
+                    <button id="dropdown-toggle" class="flex items-center text-gray-600 hover:text-primary-dark">
+                        All Pages & Services
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
 
-        document.getElementById('loginForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
+                    <div id="dropdown-content" class="dropdown-menu absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-xl">
+                        <div class="py-2 text-sm text-gray-700">
 
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const messageDiv = document.getElementById('message');
-            messageDiv.textContent = 'Logging in...';
-            messageDiv.className = '';
+                            <span class="block px-4 py-2 font-bold text-primary-dark border-b">Accounts</span>
+                            <a href="#savings" class="block px-4 py-2 hover:bg-gray-100">Savings</a>
+                            <a href="#checking" class="block px-4 py-2 hover:bg-gray-100">Checking</a>
+                            <a href="#current" class="block px-4 py-2 hover:bg-gray-100">Current</a>
+                            <a href="#business" class="block px-4 py-2 hover:bg-gray-100">Business</a>
 
-            try {
-                const response = await fetch(`${API_BASE_URL}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
-                });
+                            <span class="block px-4 py-2 font-bold text-primary-dark border-b mt-2">Services</span>
+                            <a href="#investments" class="block px-4 py-2 hover:bg-gray-100">Investments</a>
+                            <a href="#loans" class="block px-4 py-2 hover:bg-gray-100">Loans</a>
+                            <a href="#insurance" class="block px-4 py-2 hover:bg-gray-100">Insurance</a>
+                            <a href="#retirement" class="block px-4 py-2 hover:bg-gray-100">Retirement</a>
+                            <a href="#crypto" class="block px-4 py-2 hover:bg-gray-100">Crypto</a>
 
-                const data = await response.json();
+                        </div>
+                    </div>
+                </div>
 
-                if (response.ok) {
-                    // Successful login! Store the token and display account info.
-                    localStorage.setItem('gcbank_token', data.token);
-                    messageDiv.className = 'success';
-                    messageDiv.innerHTML = `
-                        Login Successful! Token stored.<br>
-                        Account: **${data.account.account_number}**<br>
-                        Balance: **$${data.account.balance}**
-                    `;
-                } else {
-                    // Login failed (e.g., Invalid credentials, 401)
-                    messageDiv.className = 'error';
-                    messageDiv.textContent = 'Login failed: ' + (data.error || 'Unknown error');
-                }
-            } catch (error) {
-                // Network or CORS error
-                messageDiv.className = 'error';
-                messageDiv.textContent = 'Network Error. Check if the GCBank API is running.';
-                console.error('Fetch error:', error);
-            }
-        });
-    </script>
+                <a href="#footer" class="text-gray-600 hover:text-primary-dark">Contact</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-toggle" class="md:hidden p-2 text-gray-600 hover:bg-gray-100">
+                <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+
+                <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden bg-gray-50 border-t">
+            <a href="#hero" class="block px-3 py-2" onclick="closeMobileMenu()">Home</a>
+            <a href="#accounts" class="block px-3 py-2" onclick="closeMobileMenu()">Accounts</a>
+            <a href="#services" class="block px-3 py-2" onclick="closeMobileMenu()">Services</a>
+            <a href="#footer" class="block px-3 py-2" onclick="closeMobileMenu()">Contact</a>
+            <a href="#accounts" class="block text-center py-2 bg-teal-500 text-white rounded-md mt-2" onclick="closeMobileMenu()">Get Started</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT (FULL CONTENT RESTORED) -->
+
+    <!-- HERO -->
+    <section id="hero" class="bg-primary-dark text-white text-center py-20">
+        <h1 class="text-5xl font-extrabold mb-4">Secure Your Tomorrow, <span class="text-teal-400">Today.</span></h1>
+        <p class="max-w-3xl mx-auto text-xl text-gray-300 mb-8">
+            GCBank is your trusted digital platform for seamless banking, smart investments, and financial security.
+        </p>
+        <a href="#accounts" class="py-3 px-8 bg-teal-500 text-white rounded-full hover:bg-teal-600">Open an Account</a>
+        <a href="#services" class="py-3 px-8 bg-white text-primary-dark rounded-full hover:bg-gray-100 ml-4">Explore Services</a>
+    </section>
+
+    <!-- ACCOUNTS -->
+    <section id="accounts" class="py-20 bg-gray-50">
+        <h2 class="text-4xl text-center font-bold text-primary-dark mb-4">Banking Solutions Built For You</h2>
+        <p class="text-center max-w-3xl mx-auto text-gray-600 mb-10">
+            Whether you're saving for the future or managing cash flow, we have the perfect account for you.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+
+            <div id="savings" class="bg-white p-6 rounded-xl shadow border-t-4 border-teal-500">
+                <h3 class="text-2xl font-semibold text-primary-dark mb-2">Savings Accounts</h3>
+                <p class="text-teal-600 mb-4">High-Interest & Flexible</p>
+                <p class="text-gray-700">Earn competitive rates with zero fees and automated saving tools.</p>
+            </div>
+
+            <div id="checking" class="bg-white p-6 rounded-xl shadow border-t-4 border-teal-500">
+                <h3 class="text-2xl font-semibold text-primary-dark mb-2">Checking Accounts</h3>
+                <p class="text-teal-600 mb-4">Daily Ease & Zero Hassle</p>
+                <p class="text-gray-700">Perfect for everyday transactions with no limits and free transfers.</p>
+            </div>
+
+            <div id="current" class="bg-white p-6 rounded-xl shadow border-t-4 border-teal-500">
+                <h3 class="text-2xl font-semibold text-primary-dark mb-2">Current Accounts</h3>
+                <p class="text-teal-600 mb-4">Overdraft & Priority</p>
+                <p class="text-gray-700">Premium experience with overdraft support and priority service.</p>
+            </div>
+
+            <div id="credit" class="bg-white p-6 rounded-xl shadow border-t-4 border-teal-500">
+                <h3 class="text-2xl font-semibold text-primary-dark mb-2">Credit Card Accounts</h3>
+                <p class="text-teal-600 mb-4">Rewards & Security</p>
+                <p class="text-gray-700">Choose from rewards, cashback, or premium global cards.</p>
+            </div>
+
+            <div id="business" class="bg-white p-6 rounded-xl shadow border-t-4 border-teal-500">
+                <h3 class="text-2xl font-semibold text-primary-dark mb-2">Business Accounts</h3>
+                <p class="text-teal-600 mb-4">Growth Focused & Scalable</p>
+                <p class="text-gray-700">Payroll, bulk transfers, and tools built for entrepreneurs.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-20 bg-white">
+        <h2 class="text-4xl text-center font-bold text-primary-dark mb-4">Expand Your Wealth Potential</h2>
+        <p class="text-center max-w-3xl mx-auto text-gray-600 mb-10">
+            GCBank offers a suite of services to grow and secure your financial future.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+
+            <div id="investments" class="p-6 rounded-xl bg-primary-dark text-white">
+                <h3 class="text-2xl mb-2 text-teal-300">Investments & Shares</h3>
+                <p>Trade global markets with expert tools and low fees.</p>
+            </div>
+
+            <div id="loans" class="p-6 rounded-xl bg-primary-dark text-white">
+                <h3 class="text-2xl mb-2 text-teal-300">Loans & Credit</h3>
+                <p>Quick approval with great rates on personal and business loans.</p>
+            </div>
+
+            <div id="insurance" class="p-6 rounded-xl bg-primary-dark text-white">
+                <h3 class="text-2xl mb-2 text-teal-300">Insurance</h3>
+                <p>Protect your home, car, family, and future with trusted plans.</p>
+            </div>
+
+            <div id="retirement" class="p-6 rounded-xl bg-primary-dark text-white">
+                <h3 class="text-2xl mb-2 text-teal-300">Retirement Plans</h3>
+                <p>Build a secure long-term financial strategy.</p>
+            </div>
+
+            <div id="crypto" class="p-6 rounded-xl bg-primary-dark text-white">
+                <h3 class="text-2xl mb-2 text-teal-300">Crypto Investments</h3>
+                <p>Buy and manage crypto assets safely in-app.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-secondary-teal py-16 text-center text-white">
+        <h2 class="text-3xl font-bold mb-4">Ready to Start Your Financial Journey?</h2>
+        <p class="text-xl mb-6">Join thousands of clients enjoying modern digital banking.</p>
+        <a href="#accounts" class="py-3 px-10 bg-white text-secondary-teal font-semibold rounded-full hover:bg-gray-200">
+            Apply Now
+        </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="bg-primary-dark text-white py-10">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-4">
+
+            <div>
+                <h4 class="text-lg font-bold text-teal-400">GCBank</h4>
+                <ul class="text-sm text-gray-300 space-y-2">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Security</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold text-teal-400">Account Help</h4>
+                <ul class="text-sm text-gray-300 space-y-2">
+                    <li><a href="#savings">Account Types</a></li>
+                    <li><a href="#loans">Loan Rates</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold text-teal-400">Legal</h4>
+                <ul class="text-sm text-gray-300 space-y-2">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-lg font-bold text-teal-400">Contact</h4>
+                <p>1-800-GCB-BANK</p>
+                <p>support@gcbank.com</p>
+                <p class="text-xs text-gray-400 mt-4">© 2025 GCBank Plc</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
 
 </body>
-</html>
+    </html>
