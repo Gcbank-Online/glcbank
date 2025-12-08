@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GCBank Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<!-- HEADER -->
+<header class="bg-white shadow p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-700">GCBank Dashboard</h1>
+
+    <nav class="flex gap-6">
+        <a href="#" class="text-gray-700">Accounts</a>
+        <a href="#" class="text-gray-700">Loans</a>
+        <a href="#" class="text-gray-700">Transfer</a>
+        <a href="#" class="text-gray-700">Profile</a>
+    </nav>
+</header>
+
+<!-- MAIN -->
+<section class="p-10">
+
+    <h2 class="text-2xl font-bold mb-6">Welcome User</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-white p-6 rounded shadow">
+            <h3 class="font-semibold">Account Balance</h3>
+            <p class="text-2xl font-bold mt-2">₦350,000.00</p>
+        </div>
+
+        <div class="bg-white p-6 rounded shadow">
+            <h3 class="font-semibold">Active Loan</h3>
+            <p class="text-xl mt-2">₦120,000</p>
+        </div>
+
+        <div class="bg-white p-6 rounded shadow">
+            <h3 class="font-semibold">Recent Transactions</h3>
+            <ul class="mt-3 text-sm">
+                <li>Transfer: ₦10,000</li>
+                <li>Airtime: ₦2,000</li>
+                <li>POS: ₦4,500</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+</body>
+</html>
